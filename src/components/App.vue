@@ -36,13 +36,19 @@
             style="height: 75%"
             separatorColor="transparent"
           >
+            <!-- Que hay dentro de la lista un v.template (view) -->
             <v-template>
-              <Label
-                id="active-task"
-                :text="todo.name"
-                class="list-group-item-heading"
-                textWrap="true"
-              />
+              <!--  Dos columnas para el circulo y el texto -->
+              <GridLayout columns="auto, *">
+                <Label col="0" class="circle" text="" />
+                <Label
+                  col="1"
+                  id="active-task"
+                  :text="todo.name"
+                  class="list-group-item-heading"
+                  textWrap="true"
+                />
+              </GridLayout>
             </v-template>
           </ListView>
         </StackLayout>
@@ -57,13 +63,19 @@
           style="height: 75%"
           separatorColor="transparent"
         >
+          <!-- Que hay dentro de la lista un v.template (view) -->
           <v-template>
-            <Label
-              id="completed-task"
-              :text="done.name"
-              class="list-group-item-heading"
-              textWrap="true"
-            />
+            <!--  Dos columnas para el circulo y el texto -->
+            <GridLayout columns="auto, *">
+              <Label col="0" class="circle" text="✓" />
+              <Label
+                col="1"
+                id="completed-task"
+                :text="done.name"
+                class="list-group-item-heading"
+                textWrap="true"
+              />
+            </GridLayout>
           </v-template>
         </ListView>
       </TabViewItem>
@@ -188,4 +200,14 @@ Button {
   text-decoration: line-through;
 }
 
+.circle {
+  width: 30;
+  height: 30;
+  padding: 0;
+  color: #42b883;
+  font-size: 25;
+  border-color: #42b883;
+  border-width: 2;
+  border-radius: 50;
+}
 </style>
