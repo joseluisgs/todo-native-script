@@ -5,8 +5,10 @@ Típica App  de gestión de tareas, ToDo, realizada con NativeScript Vue y compi
 [![NativeScript](https://img.shields.io/badge/NativeScript-Ready-blue)](https://nativescript-vue.org/)
 [![Vue Ready](https://img.shields.io/badge/Vue.js-%20Ready-%2342b983)](https://es.vuejs.org/)
 [![JS Code](https://img.shields.io/badge/JS%20Code-ES2019-yellow)](https://www.ecma-international.org/ecma-262)
-[![Licence](https://img.shields.io/github/license/joseluisgs/testing-js-jest)](https://github.com/joseluisgs/testing-js-cypress/blob/main/LICENSE)
-![GitHub](https://img.shields.io/github/last-commit/joseluisgs/testing-js-cypress)
+[![Licence](https://img.shields.io/github/license/joseluisgs/todo-native-script)](./LICENSE)
+![GitHub](https://img.shields.io/github/last-commit/joseluisgs/todo-native-script)
+
+
 
 ## Acerca de
 Típica App  de gestión de tareas, ToDo, realizada con [NativeScript](https://nativescript.org) [Vue](https://nativescript-vue.org/)  y compilada para distintas plataformas. 
