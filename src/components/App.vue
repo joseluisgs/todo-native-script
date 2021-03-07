@@ -3,9 +3,14 @@
     <!-- Barra de título -->
     <ActionBar title="Mis Tareas App" class="action-bar" />
     <!-- Mi pantalla tendrá un TabView -->
-    <TabView height="100%" androidTabsPosition="bottom">
+    <TabView
+      height="100%"
+      androidTabsPosition="bottom"
+      selectedTabTextColor="#53ba82"
+      tabTextFontSize="15"
+    >
       <!--  Tabview de Activas -->
-      <TabViewItem title="📑 Activas">
+      <TabViewItem title="📑 Activas" textTransform="uppercase">
         <!-- Usamos un layaou del tipo Stack horizontal, componentes apilados -->
         <StackLayout orientation="vertical" width="100%" height="100%">
           <!-- Lo dividmos en dos secciones, la primera es un Grid de dos columnas -->
@@ -29,9 +34,11 @@
             for="todo in todos"
             @itemTap="onItemTap"
             style="height: 75%"
+            separatorColor="transparent"
           >
             <v-template>
               <Label
+                id="active-task"
                 :text="todo.name"
                 class="list-group-item-heading"
                 textWrap="true"
@@ -42,15 +49,17 @@
       </TabViewItem>
 
       <!-- Tabview de Completadas -->
-      <TabViewItem title="🗃️ Completadas">
+      <TabViewItem title="🗃️ Completadas" textTransform="uppercase">
         <ListView
           class="list-group"
           for="done in dones"
           @itemTap="onDoneTap"
           style="height: 75%"
+          separatorColor="transparent"
         >
           <v-template>
             <Label
+              id="completed-task"
               :text="done.name"
               class="list-group-item-heading"
               textWrap="true"
@@ -139,10 +148,44 @@ ActionBar {
   color: #ffffff;
 }
 
-.message {
-  vertical-align: center;
-  text-align: center;
+TextField {
   font-size: 20;
-  color: #333333;
+  color: #53ba82;
+  margin-top: 10;
+  margin-bottom: 10;
+  margin-right: 5;
+  margin-left: 20;
 }
+
+Button {
+  font-size: 20;
+  font-weight: bold;
+  color: white;
+  background-color: #53ba82;
+  height: 40;
+  margin-top: 10;
+  margin-bottom: 10;
+  margin-right: 10;
+  margin-left: 10;
+  border-radius: 20px;
+}
+
+#active-task {
+  font-size: 20;
+  font-weight: bold;
+  color: #53ba82;
+  margin-left: 20;
+  padding-top: 5;
+  padding-bottom: 10;
+}
+
+#completed-task {
+  font-size: 20;
+  color: #d3d3d3;
+  margin-left: 20;
+  padding-top: 5;
+  padding-bottom: 10;
+  text-decoration: line-through;
+}
+
 </style>
