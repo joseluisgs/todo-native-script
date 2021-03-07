@@ -90,7 +90,17 @@ export default {
 
   // Mi modelo de datos
   data: () => ({
-    todos: [],
+    todos: [
+      {
+        name: "Aprender Vue.js"
+      },
+      {
+        name: "Realizar App con NativeScript"
+      },
+      {
+        name: "Jugar a Spiderman"
+      }
+    ],
     nuevaTarea: "",
     dones: []
   }),
