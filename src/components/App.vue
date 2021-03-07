@@ -4,6 +4,7 @@
     <ActionBar title="Mis Tareas App" class="action-bar" />
     <!-- Mi pantalla tendrá un TabView -->
     <TabView height="100%" androidTabsPosition="bottom">
+      <!--  Tabview de Activas -->
       <TabViewItem title="📑 Activas">
         <!-- Usamos un layaou del tipo Stack horizontal, componentes apilados -->
         <StackLayout orientation="vertical" width="100%" height="100%">
@@ -39,11 +40,23 @@
           </ListView>
         </StackLayout>
       </TabViewItem>
+
+      <!-- Tabview de Completadas -->
       <TabViewItem title="🗃️ Completadas">
-        <Label
-          text="This tab will list completed tasks for tracking."
-          textWrap="true"
-        />
+        <ListView
+          class="list-group"
+          for="done in dones"
+          @itemTap="onDoneTap"
+          style="height: 75%"
+        >
+          <v-template>
+            <Label
+              :text="done.name"
+              class="list-group-item-heading"
+              textWrap="true"
+            />
+          </v-template>
+        </ListView>
       </TabViewItem>
     </TabView>
   </Page>
@@ -57,22 +70,64 @@ export default {
   // Mi modelo de datos
   data: () => ({
     todos: [],
-    nuevaTarea: ""
+    nuevaTarea: "",
+    dones: []
   }),
 
   // Mis metodos
   methods: {
-    // Evento de pulsar Item
-    onItemTap: (args) => {
-      console.log("Item con índice: " + args.index + " pulsado");
+    // Evento de pulsar Item activo, usamos el function por el this
+    onItemTap(args) {
+      action("¿Que quieres hacer?", "Cancelar", [
+        "Archivar tarea",
+        "Borrar tarea"
+      ]).then(result => {
+        console.log(result);
+        switch (result) {
+          case "Archivar tarea":
+            // Quitamos de la lista de activa y la encolamos en la de terminadas
+            this.dones.unshift(args.item);
+            this.todos.splice(args.index, 1);
+            break;
+          case "Borrar tarea":
+            // Borramos de la lista
+            this.todos.splice(args.index, 1);
+            break;
+          case "Cancelar" || undefined: // Cerramos
+            break;
+        }
+      });
+    },
+
+    // Evento para eliminar activas
+    onDoneTap(args) {
+      action("¿Que quieres hacer?", "Cancelar", [
+        "Activar tarea",
+        "Borrar tarea"
+      ]).then(result => {
+        console.log(result);
+        switch (result) {
+          case "Activar tarea":
+            // Quitamos de lista de completadas y ponemos en pendientes
+            this.todos.unshift(args.item);
+            this.dones.splice(args.index, 1);
+            break;
+          case "Borrar tarea":
+            // Eliminamos de la lista
+            this.dones.splice(args.index, 1); // Removes the tapped completed task.
+            break;
+          case "Cancelar" || undefined: // Cerramos
+            break;
+        }
+      });
     },
 
     // Evento de botón
     onButtonTap() {
-      if (this.nuevaTarea === '') return;
-      console.log("Nueva tarea añadida: " + this.nuevaTarea + "."); 
-      this.todos.unshift({ name: this.nuevaTarea }); 
-      this.nuevaTarea = ""; 
+      if (this.nuevaTarea === "") return;
+      console.log(`Nueva tarea añadida: ${this.nuevaTarea}.`);
+      this.todos.unshift({ name: this.nuevaTarea });
+      this.nuevaTarea = "";
     }
   }
 };
